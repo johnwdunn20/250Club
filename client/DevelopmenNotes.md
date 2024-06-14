@@ -1,0 +1,2 @@
+- Created with npx create-expo-app@latest
+- Signed up for apple developer acct
