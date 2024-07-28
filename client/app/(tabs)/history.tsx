@@ -12,6 +12,7 @@ export default function History() {
       headerImage={
         <Image
           source={require('@/assets/images/barbell.png')}
+          style={styles.headerImage}
         />
       }>
       <ThemedView style={styles.titleContainer}>
@@ -21,12 +22,7 @@ export default function History() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">You play to win the game </ThemedText>
         <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
+          History coming soon
         </ThemedText>
       </ThemedView>
 
@@ -44,11 +40,9 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  headerImage: {
+    height: '100%',
+    width: '100%',
+    resizeMode: 'cover',
   },
 });
