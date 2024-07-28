@@ -23,4 +23,25 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
+
+  // light: {
+  //   primary: '#2C3E50',    // Dark blue
+  //   secondary: '#34495E',  // Slightly lighter blue
+  //   background: '#ECF0F1', // Light gray
+  //   surface: '#FFFFFF',    // White
+  //   text: '#2C3E50',       // Dark blue
+  //   textSecondary: '#7F8C8D', // Medium gray
+  //   accent: '#3498DB',     // Bright blue
+  //   error: '#E74C3C',      // Red
+  // },
+  // dark: {
+  //   primary: '#3498DB',    // Bright blue
+  //   secondary: '#2980B9',  // Darker blue
+  //   background: '#1A1A1A', // Very dark gray
+  //   surface: '#2C3E50',    // Dark blue
+  //   text: '#ECF0F1',       // Light gray
+  //   textSecondary: '#BDC3C7', // Light gray
+  //   accent: '#E74C3C',     // Red
+  //   error: '#FF5252',      // Lighter red
+  // }
 };
