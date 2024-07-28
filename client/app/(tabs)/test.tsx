@@ -1,12 +1,22 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Button, Icon } from 'react-native-elements';
+import { Text, Button, Icon } from '@rneui/themed';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import SwitchComponent from '@/components/Switch';
+import SearchBar from '@/components/SearchBar';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 const WelcomePage = () => {
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+
     <ThemedView style={styles.container}>
+      {/* <SwitchComponent /> */}
+      <SearchBar onSearch={() => {
+        console.log('searching...');
+        return;
+      }}/>
       <View style={styles.header}>
         <ThemedText style={styles.title} type="title">Welcome to Our App</ThemedText>
         <Icon name="person-circle-outline" type="ionicon" size={40} />
@@ -17,7 +27,7 @@ const WelcomePage = () => {
       </ThemedText>
       <Button
         title="Get Started"
-        buttonStyle={styles.button}
+        // buttonStyle={styles.button}
         containerStyle={styles.buttonContainer}
         onPress={() => { /* Add navigation or action here */ }}
       />
@@ -25,6 +35,8 @@ const WelcomePage = () => {
         Learn more about us
       </ThemedText>
     </ThemedView>
+    </TouchableWithoutFeedback>
+
   );
 };
 
