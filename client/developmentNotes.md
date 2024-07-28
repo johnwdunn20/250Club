@@ -1,1 +1,0 @@
-- Can use IOS command to go through Xcode or can scan the qr code and go through the expo app
