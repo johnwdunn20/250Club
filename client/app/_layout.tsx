@@ -9,6 +9,7 @@ import { persistQueryClient } from '@tanstack/react-query-persist-client';
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Platform } from 'react-native';
 
 
 // create the query client - will use all default settings for now
@@ -16,24 +17,30 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // How often to refetch the data
-      staleTime: 1000 * 60 * 5, // 5 minutes
+      // staleTime: 1000 * 60 * 5, // 5 minutes
+      staleTime: 0,
+
       // How long to keep the data in cache
       gcTime: 1000 * 60 * 60 * 24, // 24 hours
     },
   },
 });
 
-// React Native Async Storage is used to persist the query client cache
-// It's a key-value store that is async and unencrypted
-const asyncStoragePersister = createAsyncStoragePersister({
-  storage: AsyncStorage,
-});
 
-// Persist the query client cache to async storage
-persistQueryClient({
-  queryClient,
-  persister: asyncStoragePersister,
-});
+// Only persist the query client cache when testing on mobile, not on web
+if (Platform.OS !== 'web') {
+  // React Native Async Storage is used to persist the query client cache
+  // It's a key-value store that is async and unencrypted
+  const asyncStoragePersister = createAsyncStoragePersister({
+    storage: AsyncStorage,
+  });
+
+  // Persist the query client cache to async storage
+  persistQueryClient({
+    queryClient,
+    persister: asyncStoragePersister,
+  });
+}
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
