@@ -7,3 +7,11 @@
 
   Next Steps:
   - Setup SupaBase DB and Auth
+  - Figure out how styling options - trying out react native elements now
+  - Desing mobile screens for MVP and journey from sign on, connect, use, sign out, others?
+    - Login
+    - Profile that lets you log out
+    - Home with current day's 250 club and everyone's numbers
+    - Connect - connect with others by email
+      - I guess they might need to accept it?
+    - History - partition by week and load more on scroll
