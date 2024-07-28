@@ -1,24 +1,28 @@
 import { Image, StyleSheet, Platform } from 'react-native';
-import { useEffect, useState } from 'react';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { API_URL } from '@/config';
+import { useQuery } from '@tanstack/react-query';
 
 interface ServerResponse {
   message: string;
 }
 
+const fetchHistory = async () => {
+  const response = await fetch(`${API_URL}/api/test`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};
+
 export default function History() {
-  const [message, setMessage] = useState<string>('');
 
-  useEffect(() => {
-    fetch(`${API_URL}/api/test`)
-      .then(response => response.json())
-      .then((data: ServerResponse) => setMessage(data.message))
-      .catch(error => console.error('Error:', error));
-  }, []);
+  const { isLoading, error, data } = useQuery(['test'], fetchHistory);
 
+  if (isLoading) return <ThemedText>Loading...</ThemedText>;
+  if (error) return <ThemedText>An error occurred: {error.message}</ThemedText>;
 
   return (
     <ParallaxScrollView
@@ -36,7 +40,7 @@ export default function History() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">You play to win the game </ThemedText>
         <ThemedText>
-          History coming soon
+          {`History coming soon - ${message}`}
         </ThemedText>
       </ThemedView>
 
