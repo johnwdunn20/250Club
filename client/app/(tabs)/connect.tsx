@@ -7,7 +7,7 @@ import SwitchComponent from '@/components/Switch';
 import SearchBar from '@/components/SearchBar';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
-const WelcomePage = () => {
+const Connect = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomePage;
+export default Connect;

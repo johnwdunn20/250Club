@@ -1,47 +1,49 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+// colors.ts
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+interface ColorTheme {
+  primary: string;
+  tint: string;
+  secondary: string;
+  background: string;
+  surface: string;
+  text: string;
+  textSecondary: string;
+  accent: string;
+  error: string;
+  tabIconDefault: string;
+  tabIconSelected: string;
+}
 
-export const Colors = {
+interface AppTheme {
+  light: ColorTheme;
+  dark: ColorTheme;
+}
+
+export const Colors: AppTheme = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    primary: '#1E88E5',    // Brighter blue
+    tint: '#1E88E5',       // Same as primary
+    secondary: '#42A5F5',  // Lighter bright blue
+    background: '#F5F5F5', // Very light gray
+    surface: '#FFFFFF',    // White
+    text: '#212121',       // Very dark gray (almost black)
+    textSecondary: '#757575', // Medium gray
+    accent: '#FFA000',     // Bright amber
+    error: '#D32F2F',      // Bright red
+    tabIconDefault: '#BDBDBD', // Light gray
+    tabIconSelected: '#1E88E5', // Bright blue (same as primary)
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
-  },
-
-  // light: {
-  //   primary: '#2C3E50',    // Dark blue
-  //   secondary: '#34495E',  // Slightly lighter blue
-  //   background: '#ECF0F1', // Light gray
-  //   surface: '#FFFFFF',    // White
-  //   text: '#2C3E50',       // Dark blue
-  //   textSecondary: '#7F8C8D', // Medium gray
-  //   accent: '#3498DB',     // Bright blue
-  //   error: '#E74C3C',      // Red
-  // },
-  // dark: {
-  //   primary: '#3498DB',    // Bright blue
-  //   secondary: '#2980B9',  // Darker blue
-  //   background: '#1A1A1A', // Very dark gray
-  //   surface: '#2C3E50',    // Dark blue
-  //   text: '#ECF0F1',       // Light gray
-  //   textSecondary: '#BDC3C7', // Light gray
-  //   accent: '#E74C3C',     // Red
-  //   error: '#FF5252',      // Lighter red
-  // }
+    primary: '#2196F3',    // Vivid blue
+    tint: '#2196F3',       // Same as primary
+    secondary: '#64B5F6',  // Light blue
+    background: '#121212', // Very dark gray (material design dark theme background)
+    surface: '#1E1E1E',    // Slightly lighter than background
+    text: '#FFFFFF',       // White
+    textSecondary: '#B0BEC5', // Light blue-gray
+    accent: '#FFB300',     // Bright amber
+    error: '#FF5252',      // Bright red
+    tabIconDefault: '#78909C', // Blue-gray
+    tabIconSelected: '#2196F3', // Vivid blue (same as primary)
+  }
 };
