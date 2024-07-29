@@ -9,7 +9,8 @@
   - Setup SupaBase DB and Auth
   - Figure out how styling options - trying out react native elements now
     - Might just be easier to use claude. Start with a theme and go from there
-  - Desing mobile screens for MVP and journey from sign on, connect, use, sign out, others?
+  - Notifications
+  - Desing mobile screens for MVP and journey from sign on, connect, create workout, update workout numbers, sign out, others?
     - Login
     - Profile that lets you log out
     - Home with current day's 250 club and everyone's numbers

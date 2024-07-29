@@ -5,6 +5,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import Grid from '@/components/Grid';
+import { Button } from '@rneui/base';
 
 export default function HomeScreen() {
 
@@ -29,6 +30,7 @@ const mockData = [
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Today's Challenge</ThemedText>
         <AnimatedBicep />
+        <Button type="subtitle">Create New Challenge</Button>
       </ThemedView>
       <Grid
         data={mockData}
