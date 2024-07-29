@@ -5,28 +5,13 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
-  lightBackgroundColor?: string;
-  darkBackgroundColor?: string;
-  lightTextColor?: string;
-  darkTextColor?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ 
-  onSearch, 
-  lightBackgroundColor, 
-  darkBackgroundColor,
-  lightTextColor,
-  darkTextColor
-}) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const backgroundColor = useThemeColor(
-    { light: lightBackgroundColor, dark: darkBackgroundColor }, 
-    'background'
-  );
-  const textColor = useThemeColor(
-    { light: lightTextColor, dark: darkTextColor }, 
-    'text'
-  );
+  const backgroundColor = useThemeColor({}, 'surface');
+  const textColor = useThemeColor({}, 'text');
+  const placeholderColor = useThemeColor({}, 'textSecondary');
 
   const handleSearch = (text: string) => {
     setSearchQuery(text);
@@ -35,11 +20,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   return (
     <View style={[styles.container, { backgroundColor }]}>
-      <Feather name="search" size={20} color={textColor} style={styles.icon} />
+      <Feather name="search" size={20} color={placeholderColor} style={styles.icon} />
       <TextInput
         style={[styles.input, { color: textColor }]}
         placeholder="Search..."
-        placeholderTextColor={useThemeColor({}, 'tabIconDefault')}
+        placeholderTextColor={placeholderColor}
         value={searchQuery}
         onChangeText={handleSearch}
       />
