@@ -4,8 +4,19 @@ import { AnimatedBicep } from '@/components/AnimatedBicep';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import Grid from '@/components/Grid';
 
 export default function HomeScreen() {
+
+  // Mock data
+const mockData = [
+  { name: 'John', age: 30, role: 'Developer' },
+  { city: 'New York', country: 'USA', population: '8.4M' },
+  { product: 'Laptop', price: '$999', stock: 50 },
+  { color: 'Red', hex: '#FF0000', rgb: '255,0,0' },
+  { fruit: 'Apple', calories: 95, vitamin: 'C' },
+];
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -19,7 +30,9 @@ export default function HomeScreen() {
         <ThemedText type="title">Today's Challenge</ThemedText>
         <AnimatedBicep />
       </ThemedView>
-      
+      <Grid
+        data={mockData}
+      />
     </ParallaxScrollView>
   );
 }
