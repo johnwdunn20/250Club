@@ -1,28 +1,29 @@
 import React from 'react';
-import { StyleSheet, View, Keyboard, Pressable, Platform } from 'react-native';
+import { StyleSheet, View, Keyboard, Pressable } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import SearchBar from '@/components/SearchBar';
 
 const Connect = () => {
   const handlePressOutside = () => {
-    if (Platform.OS !== 'web') {
-      Keyboard.dismiss();
-    }
+    Keyboard.dismiss();
   };
 
   return (
     <Pressable onPress={handlePressOutside} style={styles.pressable}>
       <ThemedView style={styles.container}>
-        <SearchBar 
-          onSearch={() => {
-            console.log('searching...');
-          }}
-        />
-        <View style={styles.header}>
+        <View style={styles.searchBarContainer}>
+          <SearchBar 
+            onSearch={() => {
+              console.log('searching...');
+            }}
+          />
+        </View>
+        <View style={styles.contentContainer}>
           <ThemedText style={styles.title} type="subtitle">
             Start typing to see potential workout partners
           </ThemedText>
+          {/* Add more content here */}
         </View>
       </ThemedView>
     </Pressable>
@@ -35,17 +36,18 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 20,
-    justifyContent: 'center',
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
+  searchBarContainer: {
+    paddingTop: 20, // Adjust this value as needed
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+  },
+  contentContainer: {
+    flex: 1,
+    padding: 20,
   },
   title: {
-    flex: 1,
+    marginBottom: 20,
   },
 });
 
