@@ -7,7 +7,7 @@
 
   Next Steps:
   - Setup SupaBase DB and Auth
-  - Figure out how styling options - trying out react native elements now
+  - Figure out how styling options - try out react native elements, Native Base, others
     - Might just be easier to use claude. Start with a theme and go from there
   - Notifications
   - Desing mobile screens for MVP and journey from sign on, connect, create workout, update workout numbers, sign out, others?
