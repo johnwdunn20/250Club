@@ -1,11 +1,12 @@
 import { Image, StyleSheet, Platform } from 'react-native';
 
-import { AnimatedBicep } from '@/components/AnimatedBicep';
+
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import Grid from '@/components/Grid';
 import { Button } from '@rneui/base';
+import { AnimatedBicep } from '@/components/AnimatedBicep';
 
 export default function HomeScreen() {
 
