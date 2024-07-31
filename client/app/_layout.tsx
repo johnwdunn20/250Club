@@ -10,6 +10,8 @@ import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persi
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Platform } from 'react-native';
+import { Slot, useRouter, useSegments } from 'expo-router';
+import { useSession } from '../hooks/useSession';
 
 
 // create the query client - will use all default settings for now
@@ -61,6 +63,25 @@ export default function RootLayout() {
     return null;
   }
 
+  // Auth
+  const { session, isLoading } = useSession();
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    const inAuthGroup = segments[0] === '(auth)';
+
+    if (!session && !inAuthGroup) {
+      // Redirect to the sign-in page if the user is not signed in
+      router.replace('/sign-in');
+    } else if (session && inAuthGroup) {
+      // Redirect away from the sign-in page if the user is signed in
+      router.replace('/');
+    }
+  }, [session, segments, isLoading]);
+
   return (
     <QueryClientProvider client={new QueryClient()}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -68,6 +89,7 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
+        <Slot/>
       </ThemeProvider>
     </QueryClientProvider>
   );
