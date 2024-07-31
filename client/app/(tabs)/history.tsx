@@ -3,7 +3,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { API_URL } from '@/config';
+import { API_URL } from '@/lib/config';
 
 interface ServerResponse {
   message: string;
