@@ -1,18 +1,21 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { persistQueryClient } from '@tanstack/react-query-persist-client';
-import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { Platform } from 'react-native';
-import { Slot, useRouter, useSegments } from 'expo-router';
-import { useSession } from '../hooks/useSession';
-
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+import "react-native-reanimated";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { persistQueryClient } from "@tanstack/react-query-persist-client";
+import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { Platform } from "react-native";
+import { Slot, useRouter, useSegments } from "expo-router";
+import { useSession } from "../hooks/useSession";
 
 // create the query client - will use all default settings for now
 const queryClient = new QueryClient({
@@ -28,9 +31,8 @@ const queryClient = new QueryClient({
   },
 });
 
-
 // Only persist the query client cache when testing on mobile, not on web
-if (Platform.OS !== 'web') {
+if (Platform.OS !== "web") {
   // React Native Async Storage is used to persist the query client cache
   // It's a key-value store that is async and unencrypted
   const asyncStoragePersister = createAsyncStoragePersister({
@@ -50,7 +52,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
   useEffect(() => {
@@ -71,21 +73,20 @@ export default function RootLayout() {
   useEffect(() => {
     if (isLoading) return;
 
-    const inAuthGroup = segments[0] === '(auth)';
+    const inAuthGroup = segments[0] === "(auth)";
 
     if (!session && !inAuthGroup) {
       // Redirect to the sign-in page if the user is not signed in
-      router.replace('/sign-in');
+      router.replace("/sign-in");
     } else if (session && inAuthGroup) {
       // Redirect away from the sign-in page if the user is signed in
-      router.replace('/');
+      router.replace("/");
     }
   }, [session, segments, isLoading]);
 
   return (
     <QueryClientProvider client={new QueryClient()}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
@@ -95,4 +96,4 @@ export default function RootLayout() {
       </ThemeProvider>
     </QueryClientProvider>
   );
-} 
+}

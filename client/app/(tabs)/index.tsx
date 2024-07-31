@@ -22,7 +22,6 @@ export default function HomeScreen() {
   // auth
   const { session } = useSession();
 
-
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
