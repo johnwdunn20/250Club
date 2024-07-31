@@ -85,11 +85,13 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={new QueryClient()}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
-        <Slot/>
+        {/* Need to figure out how to use this */}
+        {/* <Slot/> */}
       </ThemeProvider>
     </QueryClientProvider>
   );
