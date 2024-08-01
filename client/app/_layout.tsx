@@ -13,7 +13,7 @@ import { persistQueryClient } from "@tanstack/react-query-persist-client";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Platform } from "react-native";
+import { Platform, ActivityIndicator, View } from "react-native";
 import { Slot, useRouter, useSegments } from "expo-router";
 import { useSession } from "../hooks/useSession";
 
@@ -71,13 +71,19 @@ export default function RootLayout() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size="large" />
+        </View>
+      )
+    };
 
     const inAuthGroup = segments[0] === "(auth)";
 
     if (!session && !inAuthGroup) {
       // Redirect to the sign-in page if the user is not signed in
-      router.replace("/sign-in");
+      router.replace("/signIn");
     } else if (session && inAuthGroup) {
       // Redirect away from the sign-in page if the user is signed in
       router.replace("/");
