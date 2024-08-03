@@ -71,14 +71,6 @@ export default function RootLayout() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoading) {
-      return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size="large" />
-        </View>
-      )
-    };
-
     const inAuthGroup = segments[0] === "(auth)";
 
     if (!session && !inAuthGroup) {
@@ -89,6 +81,14 @@ export default function RootLayout() {
       router.replace("/");
     }
   }, [session, segments, isLoading]);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    )
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
