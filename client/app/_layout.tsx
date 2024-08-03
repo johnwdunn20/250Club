@@ -13,9 +13,8 @@ import { persistQueryClient } from "@tanstack/react-query-persist-client";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Platform, ActivityIndicator, View } from "react-native";
-import { Slot, useRouter, useSegments } from "expo-router";
-import { useSession } from "../hooks/useSession";
+import { Platform } from "react-native";
+import { Slot } from "expo-router";
 
 // create the query client - will use all default settings for now
 const queryClient = new QueryClient({
@@ -50,6 +49,11 @@ if (Platform.OS !== "web") {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  // Access the root navigation state to prevent a redicrect before everything loads - expo doesn't like when I try to do that
+  // const rootNavigationState = useRootNavigationState();
+  // console.log(rootNavigationState);
+  // if (!rootNavigationState?.key) return null;
+
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -61,44 +65,19 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
-
-  // Auth
-  const { session, isLoading } = useSession();
-  const segments = useSegments();
-  const router = useRouter();
-
-  useEffect(() => {
-    const inAuthGroup = segments[0] === "(auth)";
-
-    if (!session && !inAuthGroup) {
-      // Redirect to the sign-in page if the user is not signed in
-      router.replace("/signIn");
-    } else if (session && inAuthGroup) {
-      // Redirect away from the sign-in page if the user is signed in
-      router.replace("/");
-    }
-  }, [session, segments, isLoading]);
-
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" />
-      </View>
-    )
-  };
+  // if (!loaded) {
+  //   return <Slot/>;
+  // }
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
+        {/* <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
-        </Stack>
+        </Stack> */}
         {/* Need to figure out how to use this */}
-        {/* <Slot/> */}
+        <Slot/>
       </ThemeProvider>
     </QueryClientProvider>
   );
