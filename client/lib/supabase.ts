@@ -7,8 +7,6 @@ import { Platform } from "react-native";
 const supabaseUrl = SUPABASE_URL;
 const supabaseAnonKey = SUPABASE_ANON_KEY;
 
-console.log("supabaseUrl", supabaseUrl);
-
 class SupabaseStorage {
   async getItem(key: string) {
     if (Platform.OS === "web") {

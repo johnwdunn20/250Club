@@ -33,6 +33,7 @@ export default function Auth() {
 
   async function signUpWithEmail() {
     setLoading(true);
+    console.log(`email: ${email}, password: ${password}`);
     const {
       data: { session },
       error,
