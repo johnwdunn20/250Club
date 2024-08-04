@@ -77,7 +77,7 @@ export default function RootLayout() {
           <Stack.Screen name="+not-found" />
         </Stack> */}
         {/* Need to figure out how to use this */}
-        <Slot/>
+        <Slot />
       </ThemeProvider>
     </QueryClientProvider>
   );
