@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Alert, StyleSheet, View, AppState } from "react-native";
 import { supabase } from "../lib/supabase";
 import { Button, Input } from "@rneui/themed";
+import { useForm } from "react-hook-form";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -19,6 +20,15 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // ** May use react hook forms for form validation - look up exactly what supabase requires
+  // const { control, handleSubmit, formState: { errors }, setValue } = useForm({
+  //   defaultValues: {
+  //     email: '',
+  //     password: ''
+  //   }
+  // });
+
 
   async function signInWithEmail() {
     setLoading(true);
@@ -43,8 +53,8 @@ export default function Auth() {
     });
 
     if (error) Alert.alert(error.message);
-    // if (!session)
-    //   Alert.alert("Please check your inbox for email verification!");
+    if (!session)
+      Alert.alert("Please check your inbox for email verification!");
     setLoading(false);
   }
 
