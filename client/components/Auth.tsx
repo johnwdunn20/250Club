@@ -22,6 +22,7 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
   
   // ** May use react hook forms for form validation - look up exactly what supabase requires
+  // ** Decide what the workflow is - do I want a separate page for sign up and sign in? What about OAuth?
   // const { control, handleSubmit, formState: { errors }, setValue } = useForm({
   //   defaultValues: {
   //     email: '',
