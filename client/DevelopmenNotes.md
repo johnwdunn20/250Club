@@ -17,5 +17,3 @@
     - Connect - connect with others by email
       - I guess they might need to accept it?
     - History - partition by week and load more on scroll
-
-  - Running into auth 429 - too many requests - error. May need to set up supabase locally for testing. TBD for prod

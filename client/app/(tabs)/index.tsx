@@ -32,7 +32,9 @@ export default function HomeScreen() {
         />
       }
     >
+      {/* Account needs to be its own section */}
       {session ? <Account session={session} /> : null}
+
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Today's Challenge</ThemedText>
         <AnimatedBicep />
