@@ -12,11 +12,10 @@ import { useSession } from "@/hooks/useSession";
 export default function HomeScreen() {
   // Mock data
   const mockData = [
-    { name: "John", age: 30, role: "Developer" },
-    { city: "New York", country: "USA", population: "8.4M" },
-    { product: "Laptop", price: "$999", stock: 50 },
-    { color: "Red", hex: "#FF0000", rgb: "255,0,0" },
-    { fruit: "Apple", calories: 95, vitamin: "C" },
+    { name: "John", workout: "test", role: "Developer" },
+    { name: "Elisabeth", workout: "test", role: "Athlete" },
+    { name: "Other", workout: "test", role: "Developer" },
+
   ];
 
   // auth
