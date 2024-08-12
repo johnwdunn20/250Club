@@ -77,7 +77,6 @@ export default function Account({ session }: { session: Session }) {
     }
   }
 
-  
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
