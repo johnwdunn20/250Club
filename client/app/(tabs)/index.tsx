@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Image, StyleSheet } from "react-native";
 
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -8,8 +8,10 @@ import { Button } from "@rneui/base";
 import { AnimatedBicep } from "@/components/AnimatedBicep";
 import Account from "@/components/Account";
 import { useSession } from "@/hooks/useSession";
+import { useState } from "react";
 
 export default function HomeScreen() {
+
   // Mock data
   const mockData = [
     { name: "John", workout: "test", role: "Developer" },
