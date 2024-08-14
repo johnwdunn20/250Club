@@ -8,7 +8,13 @@ import { Button } from "@rneui/base";
 import { AnimatedBicep } from "@/components/AnimatedBicep";
 import Account from "@/components/Account";
 import { useSession } from "@/hooks/useSession";
-import { useState } from "react";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import Profile from "@/components/Profile";
+import Today from "@/components/Today";
+
+const Drawer = createDrawerNavigator();
+
 
 export default function HomeScreen() {
 
@@ -24,6 +30,13 @@ export default function HomeScreen() {
   const { session } = useSession();
 
   return (
+    <>
+        {/* <NavigationContainer independent={true}>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={Today} />
+        <Drawer.Screen name="Profile" component={Profile} />
+      </Drawer.Navigator>
+    </NavigationContainer> */}
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={
@@ -43,6 +56,7 @@ export default function HomeScreen() {
       </ThemedView>
       <Grid data={mockData} />
     </ParallaxScrollView>
+    </>
   );
 }
 
