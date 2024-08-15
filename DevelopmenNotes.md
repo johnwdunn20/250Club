@@ -17,3 +17,5 @@
     - Connect - connect with others by email
       - I guess they might need to accept it?
     - History - partition by week and load more on scroll
+
+    Inserted dummy data into schema, but I need to login with real users so that auth works. So disable email verification for a bit then reinsert dummy data
