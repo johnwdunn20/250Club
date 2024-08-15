@@ -1,8 +1,14 @@
 import React from 'react'
+import { useSession } from '@/hooks/useSession';
+import Account from '@/components/Account';
 
 const profile = () => {
+  const { session } = useSession();
+
   return (
-    <div>profile</div>
+    <>
+      {session ? <Account session={session} /> : null}
+    </>
   )
 }
 
