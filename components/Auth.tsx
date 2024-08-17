@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, View, AppState } from "react-native";
+import { Alert, StyleSheet, View, AppState, Text } from "react-native";
 import { supabase } from "../lib/supabase";
 import { Button, Input } from "@rneui/themed";
 import { useForm } from "react-hook-form";
+import { Redirect } from "expo-router";
 
-
-// Tells Supabase Auth to continuously refresh the session automatically if
-// the app is in the foreground. When this is added, you will continue to receive
-// `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event
-// if the user's session is terminated. This should only be registered once.
+// Supabase Auth listener (unchanged)
 AppState.addEventListener("change", (state) => {
   if (state === "active") {
     supabase.auth.startAutoRefresh();
@@ -21,16 +18,6 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  
-  // ** May use react hook forms for form validation - look up exactly what supabase requires
-  // ** Decide what the workflow is - do I want a separate page for sign up and sign in? What about OAuth?
-  // const { control, handleSubmit, formState: { errors }, setValue } = useForm({
-  //   defaultValues: {
-  //     email: '',
-  //     password: ''
-  //   }
-  // });
-
 
   async function signInWithEmail() {
     setLoading(true);
@@ -41,6 +28,7 @@ export default function Auth() {
 
     if (error) Alert.alert(error.message);
     setLoading(false);
+    return <Redirect href="/" />;
   }
 
   async function signUpWithEmail() {
@@ -58,44 +46,63 @@ export default function Auth() {
     if (!session)
       Alert.alert("Please check your inbox for email verification!");
     setLoading(false);
+
+    return <Redirect href="/" />;
   }
 
   return (
     <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input
-          label="Email"
-          leftIcon={{ type: "font-awesome", name: "envelope" }}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          placeholder="email@address.com"
-          autoCapitalize={"none"}
-        />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Input
-          label="Password"
-          leftIcon={{ type: "font-awesome", name: "lock" }}
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-          placeholder="Password"
-          autoCapitalize={"none"}
-        />
-      </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button
-          title="Sign in"
-          disabled={loading}
-          onPress={() => signInWithEmail()}
-        />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Button
-          title="Sign up"
-          disabled={loading}
-          onPress={() => signUpWithEmail()}
-        />
+      <Text style={styles.title}>250 Club</Text>
+      <View style={styles.formContainer}>
+        <View style={styles.inputContainer}>
+          <Input
+            label="Email"
+            leftIcon={{ type: "font-awesome", name: "envelope", color: "#007AFF" }}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            placeholder="email@address.com"
+            autoCapitalize="none"
+            containerStyle={styles.input}
+            inputContainerStyle={styles.inputField}
+            labelStyle={styles.inputLabel}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Input
+            label="Password"
+            leftIcon={{ type: "font-awesome", name: "lock", color: "#007AFF" }}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            secureTextEntry={true}
+            placeholder="Password"
+            autoCapitalize="none"
+            containerStyle={styles.input}
+            inputContainerStyle={styles.inputField}
+            labelStyle={styles.inputLabel}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Sign in"
+            disabled={loading}
+            onPress={() => signInWithEmail()}
+            buttonStyle={styles.button}
+            titleStyle={styles.buttonText}
+            disabledStyle={styles.disabledButton}
+            disabledTitleStyle={styles.disabledButtonText}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Sign up"
+            disabled={loading}
+            onPress={() => signUpWithEmail()}
+            buttonStyle={[styles.button, styles.secondaryButton]}
+            titleStyle={[styles.buttonText, styles.secondaryButtonText]}
+            disabledStyle={styles.disabledButton}
+            disabledTitleStyle={styles.disabledButtonText}
+          />
+        </View>
       </View>
     </View>
   );
@@ -103,15 +110,68 @@ export default function Auth() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-    padding: 12,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    padding: 20,
   },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: "stretch",
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    color: '#333',
   },
-  mt20: {
-    marginTop: 20,
+  formContainer: {
+    width: '100%',
+    maxWidth: 400,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  inputContainer: {
+    marginBottom: 20,
+  },
+  input: {
+    paddingHorizontal: 0,
+  },
+  inputField: {
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
+  },
+  inputLabel: {
+    color: '#333',
+    fontWeight: 'normal',
+  },
+  buttonContainer: {
+    marginTop: 10,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    borderRadius: 5,
+    paddingVertical: 12,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  secondaryButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#007AFF',
+  },
+  secondaryButtonText: {
+    color: '#007AFF',
+  },
+  disabledButton: {
+    backgroundColor: '#ccc',
+  },
+  disabledButtonText: {
+    color: '#666',
   },
 });
