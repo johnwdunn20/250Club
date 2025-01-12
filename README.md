@@ -14,3 +14,5 @@ ToDo:
 - DB
   - Supabase
 - Server for push notifications
+- Payment
+  - Strip - look into their UI tool
