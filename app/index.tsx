@@ -4,7 +4,7 @@ import Button from "@/components/button";
 
 export default function Index() {
   return (
-    <View className="flex-1 items-center justify-center bg-white p-4">
+    <View className="flex flex-col items-center justify-center h-full space-y-4">
       <Button>Primary</Button>
       <Button variant="secondary">Secondary</Button>
     </View>
